@@ -14,7 +14,7 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'unblevable/quick-scope'
 Plugin 'bling/vim-airline'
 Plugin 'jiangmiao/auto-pairs'
-Plugin 'Valloric/YouCompleteMe'
+"Plugin 'Valloric/YouCompleteMe'
 Plugin 'tpope/vim-surround'
 Plugin 'digitaltoad/vim-jade'
 Plugin 'altercation/vim-colors-solarized'
@@ -121,4 +121,4 @@ nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
 " youcompleteme stuff
-let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
+"let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
