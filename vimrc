@@ -19,6 +19,7 @@ Plugin 'tpope/vim-surround'
 Plugin 'digitaltoad/vim-jade'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'mattn/emmet-vim'
+Plugin 'airblade/vim-gitgutter'
 
 call vundle#end()            " required
 filetype plugin indent on    " required

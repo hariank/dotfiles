@@ -16,3 +16,5 @@ for file in $files; do
     ln -s $dir/$file ~/.$file
     echo "success"
 done
+
+vim +PluginInstall +qall
