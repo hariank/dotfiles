@@ -123,3 +123,6 @@ nnoremap <C-H> <C-W><C-H>
 
 " youcompleteme stuff
 "let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
+
+" gitgutter refresh time
+set updatetime=250
