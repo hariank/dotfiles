@@ -14,7 +14,6 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'unblevable/quick-scope'
 Plugin 'bling/vim-airline'
 Plugin 'jiangmiao/auto-pairs'
-"Plugin 'Valloric/YouCompleteMe'
 Plugin 'tpope/vim-surround'
 Plugin 'digitaltoad/vim-jade'
 Plugin 'altercation/vim-colors-solarized'
@@ -28,23 +27,15 @@ filetype plugin indent on    " required
 let mapleader=" "
 
 " colors
-"if !has('gui_running')
-    "let g:solarized_termcolors=256
-"endif
 syntax enable
 set t_Co=256 "256 color
 set background=dark
-"let g:solarized_visibility = "high"
-"let g:solarized_contrast = "high"
 let g:solarized_termtrans = 1
 colorscheme solarized
-"colorscheme material-theme
 
 " random options
 set nobackup
 set number
-":au FocusLost * :set number
-":au FocusGained * :set relativenumber
 set ruler
 
 " indentation
@@ -71,9 +62,6 @@ let g:ctrlp_cmd = 'CtrlP'
 " Give a shortcut key to NERD Tree
 map <F2> :NERDTreeToggle<CR>
 map <F3> :NERDTreeMirror<CR>
-
-" highlight html tags
-set matchpairs+=<:>
 
 " jsx highlighting
 let g:jsx_ext_required = 0
