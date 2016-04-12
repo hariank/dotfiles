@@ -19,7 +19,8 @@ Plugin 'digitaltoad/vim-jade'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'mattn/emmet-vim'
 Plugin 'airblade/vim-gitgutter'
-Plugin 'jez/vim-better-sml'
+"Plugin 'jez/vim-better-sml'
+Plugin 'terryma/vim-multiple-cursors'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -74,7 +75,6 @@ endif
 
 " CMU settings
 set encoding=utf-8 "UTF-8 character encoding
-"set showmatch  "Highlight matching braces
 set equalalways  "Split windows equal size
 set formatoptions=croq  "Enable comment line auto formatting
 set wildignore+=*.o,*.obj,*.class,*.swp,*.pyc "Ignore junk files
@@ -98,9 +98,6 @@ set nostartofline "Vertical movement preserves horizontal position
 au BufReadPost *.c0 set syntax=c
 au BufNewFile,BufRead *.c1 set filetype=c
 
-" Strip whitespace from end of lines when writing file
-autocmd BufWritePre * :%s/\s\+$//e
-
 " for airline
 set laststatus=2
 
@@ -113,5 +110,5 @@ nnoremap <C-H> <C-W><C-H>
 " youcompleteme stuff
 "let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
 
-" gitgutter refresh time
+" for gitgutter
 set updatetime=250
