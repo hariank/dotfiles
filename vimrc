@@ -19,8 +19,8 @@ Plugin 'digitaltoad/vim-jade'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'mattn/emmet-vim'
 Plugin 'airblade/vim-gitgutter'
-"Plugin 'jez/vim-better-sml'
 Plugin 'terryma/vim-multiple-cursors'
+Plugin 'joshdick/onedark.vim'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -30,10 +30,14 @@ let mapleader=" "
 
 " colors
 syntax enable
-set t_Co=256 "256 color
-set background=dark
-let g:solarized_termtrans = 1
-colorscheme solarized
+
+"set t_Co=256 "256 color
+"set background=dark
+"let g:solarized_termtrans = 1
+"colorscheme solarized
+
+let g:onedark_termcolors = 256
+colorscheme onedark
 
 " random options
 set nobackup
@@ -98,7 +102,7 @@ set nostartofline "Vertical movement preserves horizontal position
 au BufReadPost *.c0 set syntax=c
 au BufNewFile,BufRead *.c1 set filetype=c
 
-" for airline
+" airline
 set laststatus=2
 
 " easier splitting
@@ -107,8 +111,5 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
-" youcompleteme stuff
-"let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
-
-" for gitgutter
+" gitgutter
 set updatetime=250
