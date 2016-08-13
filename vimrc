@@ -1,26 +1,18 @@
 set nocompatible
-filetype off
 
 " Vundle
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'kien/ctrlp.vim'
-Plugin 'mxw/vim-jsx'
-Plugin 'pangloss/vim-javascript'
 Plugin 'scrooloose/nerdcommenter'
-Plugin 'unblevable/quick-scope'
 Plugin 'bling/vim-airline'
-Plugin 'jiangmiao/auto-pairs'
 Plugin 'tpope/vim-surround'
-Plugin 'digitaltoad/vim-jade'
 Plugin 'altercation/vim-colors-solarized'
-Plugin 'mattn/emmet-vim'
 Plugin 'airblade/vim-gitgutter'
-Plugin 'terryma/vim-multiple-cursors'
 Plugin 'joshdick/onedark.vim'
+Plugin 'ajh17/VimCompletesMe'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -52,8 +44,6 @@ set shiftwidth=4
 set expandtab
 
 " searching
-nnoremap <leader><space> :noh<return>
-set hlsearch
 set incsearch
 
 " temp files
@@ -69,15 +59,12 @@ let g:ctrlp_cmd = 'CtrlP'
 map <F2> :NERDTreeToggle<CR>
 map <F3> :NERDTreeMirror<CR>
 
-" jsx highlighting
-let g:jsx_ext_required = 0
-
 " Indent wrapped lines up to the same level
 if exists('&breakindent')
   set breakindent
 endif
 
-" CMU settings
+" general settings
 set encoding=utf-8 "UTF-8 character encoding
 set equalalways  "Split windows equal size
 set formatoptions=croq  "Enable comment line auto formatting
@@ -90,7 +77,7 @@ set wildmode=longest,list  "Better unix-like tab completion
 set cursorline  "Highlight current line
 set clipboard=unnamed  "Copy and paste from system clipboard
 set lazyredraw  "Don't redraw while running macros (faster)
-set autochdir  "Change directory to currently open file
+"set autochdir  "Change directory to currently open file
 set wrap  "Visually wrap lines
 set linebreak  "Only wrap on 'good' characters for wrapping
 set backspace=indent,eol,start  "Better backspacing
