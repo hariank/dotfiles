@@ -13,6 +13,8 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'joshdick/onedark.vim'
 Plugin 'ajh17/VimCompletesMe'
+Plugin 'junegunn/goyo.vim'
+Plugin 'junegunn/limelight.vim'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -84,6 +86,7 @@ set backspace=indent,eol,start  "Better backspacing
 set linebreak  "Intelligently wrap long files
 set ttyfast  "Speed up vim
 set nostartofline "Vertical movement preserves horizontal position
+set autoread "Reload files
 
 " c0 highlighting
 au BufReadPost *.c0 set syntax=c
