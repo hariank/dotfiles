@@ -15,6 +15,7 @@ Plugin 'joshdick/onedark.vim'
 Plugin 'ajh17/VimCompletesMe'
 Plugin 'junegunn/goyo.vim'
 Plugin 'junegunn/limelight.vim'
+Plugin 'scrooloose/syntastic'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -103,3 +104,6 @@ nnoremap <C-H> <C-W><C-H>
 
 " gitgutter
 set updatetime=250
+
+" mouse
+set mouse=a
