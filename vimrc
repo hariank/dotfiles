@@ -15,7 +15,6 @@ Plugin 'joshdick/onedark.vim'
 Plugin 'ajh17/VimCompletesMe'
 Plugin 'junegunn/goyo.vim'
 Plugin 'junegunn/limelight.vim'
-Plugin 'scrooloose/syntastic'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -42,9 +41,10 @@ set ruler
 " indentation
 set backspace=indent,eol,start
 set autoindent
-set tabstop=4
-set shiftwidth=4
-set expandtab
+"set tabstop=4
+"set shiftwidth=4
+"set expandtab
+set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
 
 " searching
 set incsearch
@@ -90,13 +90,16 @@ set nostartofline "Vertical movement preserves horizontal position
 set autoread "Reload files
 
 " c0 highlighting
-au BufReadPost *.c0 set syntax=c
-au BufNewFile,BufRead *.c1 set filetype=c
+"au BufReadPost *.c0 set syntax=c
+"au BufNewFile,BufRead *.c1 set filetype=c
+
+" python formatting
+au FileType python setlocal formatprg=autopep8\ -
 
 " airline
 set laststatus=2
 
-" easier splitting
+" easier split navigation
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
