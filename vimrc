@@ -30,8 +30,10 @@ syntax enable
 "let g:solarized_termtrans = 1
 "colorscheme solarized
 
-let g:onedark_termcolors = 256
-colorscheme onedark
+"let g:onedark_termcolors = 256
+"colorscheme onedark
+
+colorscheme monokai
 
 " random options
 set nobackup
