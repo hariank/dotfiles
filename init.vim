@@ -1,12 +1,9 @@
 call plug#begin('~/.local/share/nvim/plugged')
-Plug 'scrooloose/nerdtree'
-Plug 'bling/vim-airline'
+Plug 'itchyny/lightline.vim'
 Plug 'tpope/vim-surround'
-Plug 'airblade/vim-gitgutter'
-Plug 'joshdick/onedark.vim'
-Plug 'junegunn/goyo.vim'
-Plug 'junegunn/limelight.vim'
 Plug 'tpope/vim-commentary'
+Plug 'yggdroot/indentline'
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' } " load only on toggle
 call plug#end()
 
 " leader space
@@ -14,7 +11,6 @@ let mapleader=" "
 
 " colors
 syntax enable
-let g:onedark_termcolors = 256
 colorscheme onedark
 
 " indentation
@@ -49,19 +45,22 @@ set nostartofline " Vertical movement preserves horizontal position
 " python formatting
 au FileType python setlocal formatprg=autopep8\ -
 
-" easier split navigation
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
+" split stuff
+set splitbelow
+set splitright
 
-" NERDTree
-map <F2> :NERDTreeToggle<CR>
-map <F3> :NERDTreeMirror<CR>
+" nerdtree
+map <f2> :nerdtreetoggle<cr>
+map <f3> :nerdtreemirror<cr>
 
-" airline
+" airline/lightline
 set laststatus=2
+let g:lightline = {
+  \ 'colorscheme': 'onedark',
+  \ }
 
 " gitgutter
 set updatetime=250
 
+" indentline
+let g:indentline_char = '┊'
