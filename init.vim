@@ -11,38 +11,6 @@ Plug 'airblade/vim-gitgutter' , { 'on':  'GitGutterEnable' }
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 call plug#end()
 
-" leader space
-let mapleader = " "
-
-" colors
-syntax enable
-colorscheme onedark
-
-" indentation
-set tabstop=8 softtabstop=0 expandtab shiftwidth=4
-if exists('&breakindent') " Indent wrapped lines up to the same level
-  set breakindent 
-endif
-set wrap " Visually wrap lines
-set linebreak " Intelligently wrap long files
-
-" searching
-set nohlsearch
-set ignorecase  " Search ignoring case
-set smartcase  " Search using smartcase
-
-" python formatting
-au FileType python setlocal formatprg=autopep8\ -
-
-" split stuff
-set splitbelow
-set splitright
-set equalalways
-nnoremap <c-j> <c-w>j
-nnoremap <c-k> <c-w>k
-nnoremap <c-l> <c-w>l
-nnoremap <c-h> <c-w>h
-
 """"""""""""""""""""""""""""""""""
 " PLUGIN SPECIFIC
 
@@ -60,10 +28,11 @@ let g:lightline = {
 set updatetime=250
 
 " fzf
-noremap <c-m> :Files<cr>
+noremap <c-m> :Buffers<cr>
+noremap <c-p> :Files<cr>
 let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 let g:fzf_buffers_jump = 1
-let g:fzf_layout = { 'down': '~10%' }
+let g:fzf_layout = { 'down': '~20%' }
 imap <c-x><c-l> <plug>(fzf-complete-line)
 
 """"""""""""""""""""""""""""""""""
@@ -84,3 +53,35 @@ set cursorline " Highlight current line
 set clipboard=unnamed " Copy and paste from system clipboard
 set lazyredraw " Don't redraw while running macros (faster)
 set nostartofline " Vertical movement preserves horizontal position
+
+" leader space
+let mapleader = " "
+
+" colors
+syntax enable
+colorscheme onedark
+
+" indentation
+set tabstop=4 softtabstop=0 expandtab shiftwidth=4 autoindent
+if exists('&breakindent') " Indent wrapped lines up to the same level
+  set breakindent
+endif
+set wrap " Visually wrap lines
+set linebreak " Intelligently wrap long files
+
+" searching
+set nohlsearch
+set ignorecase  " Search ignoring case
+set smartcase  " Search using smartcase
+
+" python formatting
+au FileType python setlocal formatprg=autopep8\ -
+
+" split stuff
+set splitbelow
+set splitright
+set equalalways
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <c-l> <c-w>l
+nnoremap <c-h> <c-w>h
