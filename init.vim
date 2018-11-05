@@ -22,6 +22,21 @@ let NERDTreeIgnore = ['\.pyc$[[file]]', '\.o$[[file]]']
 set laststatus=2
 let g:lightline = {
   \ 'colorscheme': 'onedark',
+  \ 'active': {
+  \   'left': [ [ 'mode', 'paste' ],
+  \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ],
+  \   'right': [ [ 'lineinfo' ],
+  \              [ 'percent' ],
+  \              [ 'fileformat', 'filetype' ] ]
+  \ },
+  \ 'inactive': {
+  \   'left':  [ [ 'filename', 'modified' ] ],
+  \   'right': [ [ 'lineinfo' ],
+  \              [ 'percent' ] ]
+  \ },
+  \ 'component_function': {
+  \   'gitbranch': 'fugitive#head'
+  \ },
   \ }
 
 " gitgutter
