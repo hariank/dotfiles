@@ -75,6 +75,7 @@ let mapleader = " "
 " colors
 syntax enable
 colorscheme onedark
+highlight EndOfBuffer ctermfg=black ctermbg=black " end of buffer chars
 
 " indentation
 set tabstop=4 softtabstop=0 expandtab shiftwidth=4 autoindent
