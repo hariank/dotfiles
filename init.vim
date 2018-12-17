@@ -1,21 +1,22 @@
 call plug#begin('~/.local/share/nvim/plugged')
+Plug 'airblade/vim-gitgutter' , { 'on':  'GitGutterEnable' }
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-surround'
-Plug 'airblade/vim-gitgutter' , { 'on':  'GitGutterEnable' }
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'wincent/scalpel'
 call plug#end()
 
 """"""""""""""""""""""""""""""""""
 " PLUGIN SPECIFIC
 
 " nerdtree
-map <f2> :NERDTreeToggle<cr>
+noremap <f2> :NERDTreeToggle<cr>
 let NERDTreeIgnore = ['\.pyc$[[file]]', '\.o$[[file]]']
 
 " lightline
@@ -49,6 +50,10 @@ let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 let g:fzf_buffers_jump = 1
 let g:fzf_layout = { 'down': '~20%' }
 imap <c-x><c-l> <plug>(fzf-complete-line)
+imap <c-x><c-f> <plug>(fzf-complete-path)
+
+" scalpel
+let g:ScalpelCommand='Sc'
 
 """"""""""""""""""""""""""""""""""
 
@@ -56,6 +61,7 @@ imap <c-x><c-l> <plug>(fzf-complete-line)
 set nobackup
 set noswapfile
 set number
+set relativenumber
 set ruler
 set mouse=a
 set hidden
@@ -75,7 +81,6 @@ let mapleader = " "
 " colors
 syntax enable
 colorscheme onedark
-highlight EndOfBuffer ctermfg=black ctermbg=black " end of buffer chars
 
 " indentation
 set tabstop=4 softtabstop=0 expandtab shiftwidth=4 autoindent
