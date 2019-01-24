@@ -106,3 +106,4 @@ nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 nnoremap <c-l> <c-w>l
 nnoremap <c-h> <c-w>h
+tnoremap <Esc> <c-\><c-n>
