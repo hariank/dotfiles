@@ -1,5 +1,4 @@
 call plug#begin('~/.local/share/nvim/plugged')
-Plug 'airblade/vim-gitgutter' , { 'on':  'GitGutterEnable' }
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
@@ -9,6 +8,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-surround'
+Plug 'w0rp/ale'
 Plug 'wincent/scalpel'
 call plug#end()
 
@@ -54,6 +54,21 @@ imap <c-x><c-f> <plug>(fzf-complete-path)
 
 " scalpel
 let g:ScalpelCommand='Sc'
+
+" ALE
+let g:ale_linters_explicit = 1
+let g:ale_linters = {
+  \ 'python': ['flake8'],
+  \ }
+let g:ale_lint_on_save = 1
+let g:ale_lint_on_text_changed = 'never'
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
+let generic_fixers = ['remove_trailing_lines', 'trim_whitespace']
+let g:ale_fixers = {
+  \ '*': generic_fixers,
+  \ 'python': generic_fixers + ['autopep8', 'isort'],
+  \ }
 
 """"""""""""""""""""""""""""""""""
 
@@ -106,4 +121,3 @@ nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 nnoremap <c-l> <c-w>l
 nnoremap <c-h> <c-w>h
-tnoremap <Esc> <c-\><c-n>
