@@ -1,5 +1,6 @@
 call plug#begin('~/.local/share/nvim/plugged')
 Plug 'itchyny/lightline.vim'
+Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
