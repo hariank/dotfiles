@@ -73,6 +73,7 @@ let g:ale_fixers = {
   \ }
 
 """"""""""""""""""""""""""""""""""
+" MISC
 
 " general settings
 set nobackup
@@ -123,3 +124,6 @@ nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 nnoremap <c-l> <c-w>l
 nnoremap <c-h> <c-w>h
+
+" map to rsync
+nnoremap <leader>r :!./rsync.sh
