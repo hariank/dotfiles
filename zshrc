@@ -8,7 +8,7 @@ export ZSH=~/.oh-my-zsh
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-# ZSH_THEME="pure"
+ZSH_THEME="refined"
 
 plugins=(git tmux colorize sudo zsh-autosuggestions rsync)
 
@@ -16,18 +16,11 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-# prompt
-autoload -U promptinit; promptinit
-prompt pure
-
 # Preferred editor for local and remote sessions
 export EDITOR='nvim'
 
 # ssh
 export SSH_KEY_PATH="~/.ssh/id_rsa"
-
-# prompt
-# export PROMPT='[%{$fg[red]%}%n:%{$fg[white]%}%c%{$reset_color%}] '
 
 # x forwarding tmux
 echo $DISPLAY > ~/.display.txt
