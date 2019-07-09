@@ -16,6 +16,8 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
+export VIRTUAL_ENV_DISABLE_PROMPT=
+
 # Preferred editor for local and remote sessions
 export EDITOR='nvim'
 
