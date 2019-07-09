@@ -71,6 +71,7 @@ let g:ale_fixers = {
   \ '*': generic_fixers,
   \ 'python': generic_fixers + ['autopep8', 'isort'],
   \ }
+nnoremap <leader>l :ALEFix
 
 """"""""""""""""""""""""""""""""""
 " MISC
