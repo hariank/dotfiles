@@ -84,15 +84,15 @@ set relativenumber
 set ruler
 set mouse=a
 set hidden
-set formatoptions=croq " Enable comment line auto formatting
-set wildignore+=*.o,*.obj,*.class,*.swp,*.pyc " Ignore junk files
-set wildmode=longest,list " Better unix-like tab completion
-set title " Set window title to file
-set scrolloff=5 " Never scroll off
-set cursorline " Highlight current line
-set clipboard=unnamed " Copy and paste from system clipboard
-set lazyredraw " Don't redraw while running macros (faster)
-set nostartofline " Vertical movement preserves horizontal position
+set formatoptions=croq  " Enable comment line auto formatting
+set wildignore+=*.o,*.obj,*.class,*.swp,*.pyc  " Ignore junk files
+set wildmode=longest,list  " Better unix-like tab completion
+set title  " Set window title to file
+set scrolloff=5  " Never scroll off
+set cursorline  " Highlight current line
+set clipboard=unnamed  " Copy and paste from system clipboard
+set lazyredraw  " Don't redraw while running macros (faster)
+set nostartofline  " Vertical movement preserves horizontal position
 
 " leader space
 let mapleader = " "
@@ -125,6 +125,16 @@ nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 nnoremap <c-l> <c-w>l
 nnoremap <c-h> <c-w>h
+
+" folding
+if has('folding')
+  if has('windows')
+    let &fillchars='vert: '  " less cluttered vertical window separators
+  endif
+  set foldmethod=indent  " not as cool as syntax, but faster
+  set foldlevelstart=99  " start unfolded
+endif
+nnoremap <s-tab> zA
 
 " map to rsync
 nnoremap <leader>r :!./rsync.sh
