@@ -71,7 +71,6 @@ let g:ale_fixers = {
   \ '*': generic_fixers,
   \ 'python': generic_fixers + ['autopep8', 'isort'],
   \ }
-nnoremap <leader>l :ALEFix
 
 """"""""""""""""""""""""""""""""""
 " MISC
@@ -96,6 +95,8 @@ set nostartofline  " Vertical movement preserves horizontal position
 
 " leader space
 let mapleader = " "
+nnoremap <leader>l :ALEFix
+nnoremap <leader>r :!./rsync.sh
 
 " colors
 syntax enable
@@ -135,6 +136,3 @@ if has('folding')
   set foldlevelstart=99  " start unfolded
 endif
 nnoremap <s-tab> zA
-
-" leader maps
-nnoremap <leader>r :!./rsync.sh
