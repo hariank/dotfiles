@@ -136,5 +136,5 @@ if has('folding')
 endif
 nnoremap <s-tab> zA
 
-" map to rsync
+" leader maps
 nnoremap <leader>r :!./rsync.sh
