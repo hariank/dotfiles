@@ -1,8 +1,10 @@
 call plug#begin('~/.local/share/nvim/plugged')
+Plug 'deoplete-plugins/deoplete-jedi'
 Plug 'itchyny/lightline.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'tomlion/vim-solidity'
 Plug 'tpope/vim-commentary'
@@ -72,7 +74,13 @@ let g:ale_fixers = {
   \ 'python': generic_fixers + ['autopep8', 'isort'],
   \ }
 
-""""""""""""""""""""""""""""""""""
+" deoplete
+let g:deoplete#enable_at_startup = 1
+let g:python3_host_prog = expand('~/envs/nvimp3/bin/python')
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+
+
+"""""""""""""""""""""""""""""""""
 " MISC
 
 " general settings
