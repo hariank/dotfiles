@@ -1,10 +1,12 @@
 call plug#begin('~/.local/share/nvim/plugged')
 Plug 'deoplete-plugins/deoplete-jedi'
+Plug 'honza/vim-snippets',
 Plug 'itchyny/lightline.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'SirVer/ultisnips',
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'tomlion/vim-solidity'
 Plug 'tpope/vim-commentary'
