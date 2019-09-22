@@ -79,6 +79,7 @@ let g:ale_fixers = {
 " deoplete
 let g:deoplete#enable_at_startup = 1
 let g:python3_host_prog = expand('~/envs/nvimp3/bin/python')
+let g:UltiSnipsExpandTrigger="<C-j>"
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
 " fugitive
@@ -87,7 +88,6 @@ command! Gstatus call LazyLoadFugitive('Gstatus')
 command! Gdiff call LazyLoadFugitive('Gdiff')
 command! Glog call LazyLoadFugitive('Glog')
 command! Gblame call LazyLoadFugitive('Gblame')
-
 function! LazyLoadFugitive(cmd)
   call plug#load('vim-fugitive')
   call fugitive#detect(expand('%:p'))
