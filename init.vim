@@ -22,7 +22,9 @@ call plug#end()
 " PLUGIN SPECIFIC
 
 " nerdtree
-noremap <f2> :NERDTreeToggle<cr>
+noremap <c-t> :NERDTreeToggle<cr>
+let g:NERDTreeWinPos = "right"
+let g:NERDTreeWinSize = 45
 let NERDTreeIgnore = ['\.pyc$[[file]]', '\.o$[[file]]']
 
 " lightline
@@ -62,11 +64,6 @@ imap <c-x><c-f> <plug>(fzf-complete-path)
 let g:ScalpelCommand='Sc'
 
 " ALE
-let g:ale_linters_explicit = 1
-let g:ale_linters = {
-  \ 'python': ['flake8'],
-  \ }
-let g:ale_lint_on_save = 1
 let g:ale_lint_on_text_changed = 'never'
 nmap <silent> [c <Plug>(ale_previous_wrap)
 nmap <silent> ]c <Plug>(ale_next_wrap)
@@ -85,9 +82,8 @@ inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 " fugitive
 command! Gst call LazyLoadFugitive('Gstatus')
 command! Gstatus call LazyLoadFugitive('Gstatus')
+command! Gd call LazyLoadFugitive('Gsdiff')
 command! Gdiff call LazyLoadFugitive('Gdiff')
-command! Glog call LazyLoadFugitive('Glog')
-command! Gblame call LazyLoadFugitive('Gblame')
 function! LazyLoadFugitive(cmd)
   call plug#load('vim-fugitive')
   call fugitive#detect(expand('%:p'))
