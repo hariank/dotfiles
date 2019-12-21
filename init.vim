@@ -64,12 +64,14 @@ imap <c-x><c-f> <plug>(fzf-complete-path)
 let g:ScalpelCommand='Sc'
 
 " ALE
+let g:ale_linters = {'cpp': ['clangtidy']}
 let g:ale_lint_on_text_changed = 'never'
 nmap <silent> [c <Plug>(ale_previous_wrap)
 nmap <silent> ]c <Plug>(ale_next_wrap)
 let generic_fixers = ['remove_trailing_lines', 'trim_whitespace']
 let g:ale_fixers = {
   \ '*': generic_fixers,
+  \ 'cpp': generic_fixers + ['clang-format'],
   \ 'python': generic_fixers + ['autopep8', 'isort'],
   \ }
 
@@ -135,6 +137,9 @@ set smartcase  " Search using smartcase
 
 " python formatting
 au FileType python setlocal formatprg=autopep8\ -
+
+" cpp header file switch
+nnoremap <leader>h :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>
 
 " split stuff
 set splitbelow
