@@ -1,28 +1,37 @@
 call plug#begin('~/.local/share/nvim/plugged')
-Plug 'deoplete-plugins/deoplete-jedi'
-Plug 'honza/vim-snippets',
+Plug 'djoshea/vim-autoread'
+Plug 'hallzy/lightline-onedark'
+Plug 'honza/vim-snippets'
 Plug 'itchyny/lightline.vim'
 Plug 'jiangmiao/auto-pairs'
+Plug 'joshdick/onedark.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'SirVer/ultisnips',
+Plug 'mhinz/vim-signify'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'solarnz/thrift.vim'
+Plug 'tmhedberg/SimpylFold'
 Plug 'tomlion/vim-solidity'
 Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-fugitive', { 'on': [] }
+Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-surround'
-Plug 'w0rp/ale'
 Plug 'wincent/scalpel'
 call plug#end()
+
+" leader space
+let mapleader = " "
 
 """"""""""""""""""""""""""""""""""
 " PLUGIN SPECIFIC
 
+" ctags
+set tags=tags
+
 " nerdtree
 noremap <c-t> :NERDTreeToggle<cr>
+noremap <leader>t :NERDTreeFind<cr>
 let g:NERDTreeWinPos = "right"
 let g:NERDTreeWinSize = 45
 let NERDTreeIgnore = ['\.pyc$[[file]]', '\.o$[[file]]']
@@ -48,49 +57,24 @@ let g:lightline = {
   \ },
   \ }
 
-" gitgutter
-set updatetime=250
+" signify
+set updatetime=100
 
 " fzf
-noremap <c-m> :Buffers<cr>
+noremap <c-n> :Buffers<cr>
 noremap <c-p> :Files<cr>
 let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 let g:fzf_buffers_jump = 1
-let g:fzf_layout = { 'down': '~20%' }
+let g:fzf_layout = { 'down': '~35%' }
 imap <c-x><c-l> <plug>(fzf-complete-line)
 imap <c-x><c-f> <plug>(fzf-complete-path)
+nnoremap <leader>a :Ag <c-r>=expand("<cword>")<cr><cr>
 
 " scalpel
 let g:ScalpelCommand='Sc'
 
-" ALE
-let g:ale_linters = {'cpp': ['clangtidy']}
-let g:ale_lint_on_text_changed = 'never'
-nmap <silent> [c <Plug>(ale_previous_wrap)
-nmap <silent> ]c <Plug>(ale_next_wrap)
-let generic_fixers = ['remove_trailing_lines', 'trim_whitespace']
-let g:ale_fixers = {
-  \ '*': generic_fixers,
-  \ 'cpp': generic_fixers + ['clang-format'],
-  \ 'python': generic_fixers + ['autopep8', 'isort'],
-  \ }
-
-" deoplete
-let g:deoplete#enable_at_startup = 1
-let g:python3_host_prog = expand('~/envs/nvimp3/bin/python')
-let g:UltiSnipsExpandTrigger="<C-j>"
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-
-" fugitive
-command! Gst call LazyLoadFugitive('Gstatus')
-command! Gstatus call LazyLoadFugitive('Gstatus')
-command! Gd call LazyLoadFugitive('Gsdiff')
-command! Gdiff call LazyLoadFugitive('Gdiff')
-function! LazyLoadFugitive(cmd)
-  call plug#load('vim-fugitive')
-  call fugitive#detect(expand('%:p'))
-  exe a:cmd
-endfunction
+nnoremap <leader>b :!black %<CR>
+nnoremap <leader>u :!~/scripts/update_tags.sh<CR>
 
 """""""""""""""""""""""""""""""""
 " MISC
@@ -104,8 +88,6 @@ set ruler
 set mouse=a
 set hidden
 set formatoptions=croq  " Enable comment line auto formatting
-set wildignore+=*.o,*.obj,*.class,*.swp,*.pyc  " Ignore junk files
-set wildmode=longest,list  " Better unix-like tab completion
 set title  " Set window title to file
 set scrolloff=5  " Never scroll off
 set cursorline  " Highlight current line
@@ -113,17 +95,36 @@ set clipboard=unnamed  " Copy and paste from system clipboard
 set lazyredraw  " Don't redraw while running macros (faster)
 set nostartofline  " Vertical movement preserves horizontal position
 
-" leader space
-let mapleader = " "
-nnoremap <leader>l :ALEFix
-nnoremap <leader>r :!./rsync.sh
+" Wildmenu completion: use for file exclusions"
+set wildmenu
+set wildmode=list:longest
+set wildignore+=.hg,.git,.svn " Version Controls"
+set wildignore+=*.aux,*.out,*.toc "Latex Indermediate files"
+set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg "Binary Imgs"
+set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest "Compiled Object files"
+set wildignore+=*.spl "Compiled speolling world list"
+set wildignore+=*.sw? "Vim swap files"
+set wildignore+=*.DS_Store "OSX SHIT"
+set wildignore+=*.luac "Lua byte code"
+set wildignore+=migrations "Django migrations"
+set wildignore+=*.pyc "Python Object codes"
+set wildignore+=*.orig "Merge resolution files"
+set wildignore+=*.class "java/scala class files"
+set wildignore+=*/target/* "sbt target directory"
+
+" No annoying sound on errors
+set noerrorbells
+set novisualbell
+set t_vb=
+set tm=500
 
 " colors
 syntax enable
 colorscheme onedark
 
 " indentation
-set tabstop=4 softtabstop=0 expandtab shiftwidth=4 autoindent
+let g:python_recommended_style=0
+set tabstop=2 softtabstop=0 expandtab shiftwidth=2 smarttab
 if exists('&breakindent') " Indent wrapped lines up to the same level
   set breakindent
 endif
@@ -134,9 +135,6 @@ set linebreak " Intelligently wrap long files
 set nohlsearch
 set ignorecase  " Search ignoring case
 set smartcase  " Search using smartcase
-
-" python formatting
-au FileType python setlocal formatprg=autopep8\ -
 
 " cpp header file switch
 nnoremap <leader>h :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>
@@ -151,11 +149,8 @@ nnoremap <c-l> <c-w>l
 nnoremap <c-h> <c-w>h
 
 " folding
-if has('folding')
-  if has('windows')
-    let &fillchars='vert: '  " less cluttered vertical window separators
-  endif
-  set foldmethod=indent  " not as cool as syntax, but faster
-  set foldlevelstart=99  " start unfolded
-endif
+set foldlevelstart=99  " start unfolded
 nnoremap <s-tab> zA
+
+" http://stackoverflow.com/questions/1551231/highlight-variable-under-cursor-in-vim-like-in-netbeans
+:autocmd CursorMoved * exe printf('match IncSearch /\V\<%s\>/', escape(expand('<cword>'), '/\'))
