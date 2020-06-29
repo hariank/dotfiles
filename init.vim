@@ -1,9 +1,10 @@
 call plug#begin('~/.local/share/nvim/plugged')
+Plug 'christoomey/vim-tmux-navigator'
 Plug 'djoshea/vim-autoread'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'hallzy/lightline-onedark'
 Plug 'honza/vim-snippets'
 Plug 'itchyny/lightline.vim'
-Plug 'jiangmiao/auto-pairs'
 Plug 'joshdick/onedark.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
@@ -28,6 +29,7 @@ let mapleader = " "
 
 " ctags
 set tags=tags
+nnoremap <leader>u :!~/scripts/update_tags.sh<CR>
 
 " nerdtree
 noremap <c-t> :NERDTreeToggle<cr>
@@ -73,8 +75,12 @@ nnoremap <leader>a :Ag <c-r>=expand("<cword>")<cr><cr>
 " scalpel
 let g:ScalpelCommand='Sc'
 
+" fugitive
+nnoremap <silent> <Leader>gs :Gstatus<CR>:15wincmd_<CR>
+
+" external 
 nnoremap <leader>b :!black %<CR>
-nnoremap <leader>u :!~/scripts/update_tags.sh<CR>
+nnoremap <leader>r :!~/scripts/rsync.sh<CR>
 
 """""""""""""""""""""""""""""""""
 " MISC
@@ -136,6 +142,22 @@ set nohlsearch
 set ignorecase  " Search ignoring case
 set smartcase  " Search using smartcase
 
+" tab autocomplete
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" MULTIPURPOSE TAB KEY
+" Indent if we're at the beginning of a line. Else, do completion.
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! InsertTabWrapper()
+    let col = col('.') - 1
+    if !col || getline('.')[col - 1] !~ '\k'
+        return "\<tab>"
+    else
+        return "\<c-p>"
+    endif
+endfunction
+inoremap <expr> <tab> InsertTabWrapper()
+" inoremap <s-tab> <c-n>
+
 " cpp header file switch
 nnoremap <leader>h :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>
 
@@ -154,3 +176,13 @@ nnoremap <s-tab> zA
 
 " http://stackoverflow.com/questions/1551231/highlight-variable-under-cursor-in-vim-like-in-netbeans
 :autocmd CursorMoved * exe printf('match IncSearch /\V\<%s\>/', escape(expand('<cword>'), '/\'))
+
+function! CopyPhabLink()
+  let lineNumber = line(".")
+  let filename = @%
+  let root = "https://abnormal.phacility.com/diffusion/1/browse/master/"
+  let @+ = root . filename . "$" . lineNumber
+  echo "Copied URL into clipboard"
+endfunction
+nnoremap <leader>y :call CopyPhabLink()<CR>
+nnoremap <leader>f :let @+=expand("%")<CR>
