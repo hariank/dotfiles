@@ -1,0 +1,1 @@
+/Users/hmuthakana/.doom.d/config.el
