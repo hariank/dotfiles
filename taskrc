@@ -44,4 +44,3 @@ context.side = +@side
 
 # tag weighting
 urgency.user.tag.later.coefficient = -0.5
-context=work

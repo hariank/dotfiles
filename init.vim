@@ -1,7 +1,7 @@
 call plug#begin('~/.local/share/nvim/plugged')
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'djoshea/vim-autoread'
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'fatih/vim-go', {'for': 'go', 'do': ':GoUpdateBinaries' }
 Plug 'hallzy/lightline-onedark'
 Plug 'honza/vim-snippets'
 Plug 'itchyny/lightline.vim'
@@ -9,7 +9,6 @@ Plug 'joshdick/onedark.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
 Plug 'mhinz/vim-signify'
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'solarnz/thrift.vim'
 Plug 'tmhedberg/SimpylFold'
 Plug 'tomlion/vim-solidity'
