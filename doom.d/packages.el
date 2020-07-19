@@ -52,3 +52,5 @@
 
 ;; (package! elpy)
 (package! go-mode)
+(package! thrift)
+(package! blacken)
