@@ -9,29 +9,11 @@
 (setq user-full-name "Hariank Muthakana"
       user-mail-address "hariank3k@gmail.com")
 
-;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
-;; are the three important ones:
-;;
-;; + `doom-font'
-;; + `doom-variable-pitch-font'
-;; + `doom-big-font' -- used for `doom-big-font-mode'; use this for
-;;   presentations or streaming.
-;;
-;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
-;; font string. You generally only need these two:
-;; (setq doom-font (font-spec :family "monospace" :size 12 :weight 'semi-light)
-;;       doom-variable-pitch-font (font-spec :family "sans" :size 13))
-
-;; There are two ways to load a theme. Both assume the theme is installed and
-;; available. You can either set `doom-theme' or manually load a theme with the
-;; `load-theme' function. This is the default:
-
 ;; for gui
 (setq doom-font "Inconsolata-14"
       doom-variable-pitch-font "Inconsolata-14")
 (setq doom-theme 'doom-vibrant)
 (setq display-line-numbers-type t)
-;; (global-visual-line-mode t) ;; visual line wrap
 
 
 ;; Here are some additional functions/macros that could help you configure Doom:
@@ -56,28 +38,33 @@
 (projectile-add-known-project "~/dotfiles")
 
 ;; org-mode and org-roam
-(add-hook 'after-init-hook 'org-roam-mode)`
-(add-hook 'org-roam-mode-hook 'org-roam-buffer-toggle-display)
+;; (add-hook 'after-init-hook 'org-roam-mode)`
+;; (add-hook 'org-roam-mode-hook 'org-roam-buffer-toggle-display)
 
 (setq org-directory "~/Dropbox/private/roam/")
 (setq org-default-notes-file "~/Dropbox/private/roam/inbox.org")
-(setq org-agenda-files '("~/Dropbox/private/roam/"))
+(setq org-agenda-files '("~/Dropbox/private/roam/inbox.org"
+                         "~/Dropbox/private/roam/projects.org"
+                         "~/Dropbox/private/roam/backlog.org"))
 
-;; if slow
-;; (setq org-agenda-files '("~/Dropbox/private/roam/inbox.org"
-;;                          "~/Dropbox/private/roam/projects.org"
-;;                          "~/Dropbox/private/roam/backlog.org"))
+(setq org-roam-directory "~/Dropbox/private/roam/")
+(setq org-roam-link-title-format "%s")
 
 (setq org-agenda-custom-commands '(("ww" "Work tasks" tags-todo "+work"
-                                   ((org-agenda-files '("~/Dropbox/private/roam/projects.org"))))
-                                   ("ws" "Nonwork tasks" tags-todo "-work"
-                                   ((org-agenda-files '("~/Dropbox/private/roam/projects.org"))))
+                                   ((org-agenda-files '("~/Dropbox/private/roam/projects.org")) (org-agenda-sorting-strategy '(todo-state-down))))
+                                   ("ws" "Side tasks" tags-todo "+side"
+                                   ((org-agenda-files '("~/Dropbox/private/roam/projects.org")) (org-agenda-sorting-strategy '(todo-state-down))))
+                                   ("wh" "home tasks" tags-todo "+home"
+                                   ((org-agenda-files '("~/Dropbox/private/roam/projects.org")) (org-agenda-sorting-strategy '(todo-state-down))))
                                    ("bw" "Backlog work tasks" tags-todo "+work"
-                                   ((org-agenda-files '("~/Dropbox/private/roam/backlog.org"))))
+                                   ((org-agenda-files '("~/Dropbox/private/roam/backlog.org")) (org-agenda-sorting-strategy '(todo-state-down))))
                                    ("bs" "Backlog nonwork tasks" tags-todo "-work"
-                                   ((org-agenda-files '("~/Dropbox/private/roam/backlog.org"))))
-                                   ))
-;; don't wrap in agenda mode
+                                   ((org-agenda-files '("~/Dropbox/private/roam/backlog.org")) (org-agenda-sorting-strategy '(todo-state-down))))
+                                   ("f" "Fitlog" tags "+fitlog"
+                                   ((org-agenda-files '("~/Dropbox/private/roam/"))))))
+
+;; wrap by default, but don't wrap in agenda mode - currently not working
+;; (global-visual-line-mode t) ;; visual line wrap
 ;; (add-hook 'org-agenda-mode-hook
 ;;       (lambda ()
 ;;         (make-local-variable 'visual-line-mode)
@@ -95,18 +82,12 @@
                            ("~/Dropbox/private/roam/backlog.org" :maxlevel . 2)
                            ))
 ;; autosave all org buffers periodically
-`(add-hook 'auto-save-hook 'org-save-all-org-buffers)`
-(setq org-todo-keywords
-      (quote ((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d)"))))
+;; `(add-hook 'auto-save-hook 'org-save-all-org-buffers)`
+
 ;; customize how org nesting looks
 (setq org-n-level-faces `1)
 (custom-theme-set-faces 'user
                         `(org-level-1 ((t (:foreground "grey")))))
-
-(setq org-roam-directory "~/Dropbox/private/roam/")
-(setq org-roam-link-title-format "%s")
-;; (add-hook 'after-init-hook 'org-roam-mode)`
-;; (add-hook 'org-roam-mode-hook 'org-roam-buffer-toggle-display)
 
 ;; when browsing wrapped lines scroll visually instead of jumping
 (define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
@@ -153,46 +134,21 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 )
 (add-hook 'go-mode-hook 'my-go-mode-hook)
 
-;; folding leaf nodes in file - inconsistent
-;; (defun hs-hide-leafs-recursive (minp maxp)
-;;       "Hide blocks below point that do not contain further blocks in region (MINP MAXP)."
-;;       (when (hs-find-block-beginning)
-;;         (setq minp (1+ (point)))
-;;         (funcall hs-forward-sexp-func 1)
-;;         (setq maxp (1- (point))))
-;;       (unless hs-allow-nesting
-;;         (hs-discard-overlays minp maxp))
-;;       (goto-char minp)
-;;       (let ((leaf t))
-;;         (while (progn
-;;                  (forward-comment (buffer-size))
-;;                  (and (< (point) maxp)
-;;                       (re-search-forward hs-block-start-regexp maxp t)))
-;;           (setq pos (match-beginning hs-block-start-mdata-select))
-;;           (if (hs-hide-leafs-recursive minp maxp)
-;;               (save-excursion
-;;                 (goto-char pos)
-;;                 (hs-hide-block-at-point t)))
-;;           (setq leaf nil))
-;;         (goto-char maxp)
-;;         leaf))
-;; (defun hs-hide-leafs ()
-;;     "Hide all blocks in the buffer that do not contain subordinate blocks."
-;;     (interactive)
-;;     (hs-life-goes-on
-;;       (save-excursion
-;;         (message "Hiding blocks ...")
-;;         (save-excursion
-;;           (goto-char (point-min))
-;;           (hs-hide-leafs-recursive (point-min) (point-max)))
-;;         (message "Hiding blocks ... done"))
-;;       (run-hooks 'hs-hide-hook)))
-
-(global-set-key (kbd "<backtab>") 'hs-toggle-hiding)
-(define-key python-mode-map (kbd "<backtab>") nil)
+;; (global-set-key (kbd "<backtab>") 'hs-toggle-hiding)
+;; (define-key python-mode-map (kbd "<backtab>") nil)
 
 ;; python mode settings
-(add-hook 'python-mode-hook
-          (function (lambda ()
-                      (setq indent-tabs-mode nil
-                            tab-width 2))))
+(defun my-python-mode-hook ()
+  (setq indent-tabs-mode nil tab-width 2)
+  (idle-highlight-mode t)
+)
+(add-hook 'python-mode-hook 'my-python-mode-hook)
+
+(define-key evil-normal-state-map (kbd "C-c +") 'evil-numbers/inc-at-pt)
+(define-key evil-normal-state-map (kbd "C-c -") 'evil-numbers/dec-at-pt)
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(org-level-1 ((t (:foreground "grey")))))

@@ -2,18 +2,18 @@ call plug#begin('~/.local/share/nvim/plugged')
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'djoshea/vim-autoread'
 Plug 'fatih/vim-go', {'for': 'go', 'do': ':GoUpdateBinaries' }
-Plug 'hallzy/lightline-onedark'
+" Plug 'hallzy/lightline-onedark'
 Plug 'honza/vim-snippets'
-Plug 'itchyny/lightline.vim'
-Plug 'joshdick/onedark.vim'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
-Plug 'junegunn/fzf.vim'
+" Plug 'itchyny/lightline.vim'
+" Plug 'joshdick/onedark.vim'
+" Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
+" Plug 'junegunn/fzf.vim'
 Plug 'mhinz/vim-signify'
 Plug 'solarnz/thrift.vim'
 Plug 'tmhedberg/SimpylFold'
-Plug 'tomlion/vim-solidity'
+" Plug 'tomlion/vim-solidity'
 Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-fugitive'
+" Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-surround'
@@ -39,24 +39,24 @@ let NERDTreeIgnore = ['\.pyc$[[file]]', '\.o$[[file]]']
 
 " lightline
 set laststatus=2
-let g:lightline = {
-  \ 'colorscheme': 'onedark',
-  \ 'active': {
-  \   'left': [ [ 'mode', 'paste' ],
-  \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ],
-  \   'right': [ [ 'lineinfo' ],
-  \              [ 'percent' ],
-  \              [ 'fileformat', 'filetype' ] ]
-  \ },
-  \ 'inactive': {
-  \   'left':  [ [ 'filename', 'modified' ] ],
-  \   'right': [ [ 'lineinfo' ],
-  \              [ 'percent' ] ]
-  \ },
-  \ 'component_function': {
-  \   'gitbranch': 'fugitive#head'
-  \ },
-  \ }
+" let g:lightline = {
+"   \ 'colorscheme': 'onedark',
+"   \ 'active': {
+"   \   'left': [ [ 'mode', 'paste' ],
+"   \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ],
+"   \   'right': [ [ 'lineinfo' ],
+"   \              [ 'percent' ],
+"   \              [ 'fileformat', 'filetype' ] ]
+"   \ },
+"   \ 'inactive': {
+"   \   'left':  [ [ 'filename', 'modified' ] ],
+"   \   'right': [ [ 'lineinfo' ],
+"   \              [ 'percent' ] ]
+"   \ },
+"   \ 'component_function': {
+"   \   'gitbranch': 'fugitive#head'
+"   \ },
+"   \ }
 
 " signify
 set updatetime=100
@@ -125,7 +125,7 @@ set tm=500
 
 " colors
 syntax enable
-colorscheme onedark
+colorscheme default
 
 " indentation
 let g:python_recommended_style=0
@@ -174,7 +174,7 @@ set foldlevelstart=99  " start unfolded
 nnoremap <s-tab> zA
 
 " http://stackoverflow.com/questions/1551231/highlight-variable-under-cursor-in-vim-like-in-netbeans
-:autocmd CursorMoved * exe printf('match IncSearch /\V\<%s\>/', escape(expand('<cword>'), '/\'))
+" :autocmd CursorMoved * exe printf('match IncSearch /\V\<%s\>/', escape(expand('<cword>'), '/\'))
 
 function! CopyPhabLink()
   let lineNumber = line(".")
