@@ -46,14 +46,13 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 (global-set-key [escape] 'evil-exit-emacs-state)
 
 ;; general autocomplete
-;; (after! company
-;;   (setq company-idle-delay 0.1
-;;         company-minimum-prefix-length 2)
-;;   (setq company-global-modes '(not org-mode))
-;; (add-hook 'evil-normal-state-entry-hook #'company-abort)) ;; make aborting less annoying.
+(after! company
+  ;; (setq company-idle-delay 0.1
+  ;;       company-minimum-prefix-length 2)
+(add-hook 'evil-normal-state-entry-hook #'company-abort)) ;; make aborting less annoying.
 
 ;; tags
-(setq tags-revert-without-query 1)
+(setq tags-revert-without-query 1) ;; auto-reread tags when changed
 
 ;; flycheck
 (setq flycheck-global-modes nil)
