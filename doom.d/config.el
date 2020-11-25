@@ -34,12 +34,9 @@
 ;; they are implemented.
 
 ;; project directories
-(projectile-add-known-project (getenv "SOURCE"))
 (projectile-add-known-project "~/dotfiles")
-
-;; org-mode and org-roam
-;; (add-hook 'after-init-hook 'org-roam-mode)`
-;; (add-hook 'org-roam-mode-hook 'org-roam-buffer-toggle-display)
+(projectile-add-known-project "~/Dropbox/private/roam/")
+(projectile-add-known-project (getenv "SOURCE"))
 
 (setq org-directory "~/Dropbox/private/roam/")
 (setq org-default-notes-file "~/Dropbox/private/roam/inbox.org")
@@ -47,8 +44,9 @@
                          "~/Dropbox/private/roam/projects.org"
                          "~/Dropbox/private/roam/backlog.org"))
 
-(setq org-roam-directory "~/Dropbox/private/roam/")
+(setq org-roam-directory "/Users/hmuthakana/Dropbox/private/roam/")
 (setq org-roam-link-title-format "%s")
+(setq org-roam-buffer-width 0.25)
 
 (setq org-agenda-custom-commands '(("ww" "Work tasks" tags-todo "+work"
                                    ((org-agenda-files '("~/Dropbox/private/roam/projects.org")) (org-agenda-sorting-strategy '(todo-state-down))))
@@ -81,8 +79,10 @@
 (setq org-refile-targets '(("~/Dropbox/private/roam/projects.org" :maxlevel . 2)
                            ("~/Dropbox/private/roam/backlog.org" :maxlevel . 2)
                            ))
-;; autosave all org buffers periodically
-;; `(add-hook 'auto-save-hook 'org-save-all-org-buffers)`
+
+;; autosave all org buffers on agenda quit
+(advice-add 'org-agenda-quit :before 'org-save-all-org-buffers)
+
 
 ;; customize how org nesting looks
 (setq org-n-level-faces `1)
@@ -112,14 +112,20 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 (define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
 (global-set-key [escape] 'evil-exit-emacs-state)
 
-;; tab autocompletes
-;; (setq tab-always-indent 'complete)
+;; autocomplete
+;; (after! company
+;;   (setq company-idle-delay 0.1
+;;         company-minimum-prefix-length 2)
+;;   (setq company-global-modes '(not org-mode))
+;; (add-hook 'evil-normal-state-entry-hook #'company-abort)) ;; make aborting less annoying.
 
 ;; tags
 (setq tags-revert-without-query 1)
 
 ;; flycheck
 (setq flycheck-global-modes nil)
+;; (after! flycheck
+;;   (setq-default flycheck-checker 'python-pylint))
 
 ;; go mode settings
 (defun my-go-mode-hook ()
@@ -140,7 +146,7 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 ;; python mode settings
 (defun my-python-mode-hook ()
   (setq indent-tabs-mode nil tab-width 2)
-  (idle-highlight-mode t)
+  ;; (idle-highlight-mode t)
 )
 (add-hook 'python-mode-hook 'my-python-mode-hook)
 
@@ -152,3 +158,36 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(org-level-1 ((t (:foreground "grey")))))
+
+;; doom prompts speeedup and cleanup
+(setq which-key-allow-multiple-replacements t)
+(after! which-key
+  (pushnew!
+   which-key-replacement-alist
+   '(("" . "\\`+?evil[-:]?\\(?:a-\\)?\\(.*\\)") . (nil . "◂\\1"))
+   '(("\\`g s" . "\\`evilem--?motion-\\(.*\\)") . (nil . "◃\\1"))
+   ))
+
+(defun xah-copy-file-path (&optional @dir-path-only-p)
+"Copy the current buffer's full file path or dired path to `kill-ring'.
+If in dired, copy the file/dir cursor is on, or marked files.
+URL `http://ergoemacs.org/emacs/emacs_copy_file_path.html'"
+  (interactive "P")
+  (let (($fpath
+         (if (string-equal major-mode 'dired-mode)
+             (progn
+               (let (($result (mapconcat 'identity (dired-get-marked-files) "\n")))
+                 (if (equal (length $result) 0)
+                     (progn default-directory )
+                   (progn $result))))
+           (if (buffer-file-name)
+               (buffer-file-name)
+             (expand-file-name default-directory)))))
+    (kill-new
+     (if @dir-path-only-p
+         (progn
+           (message "Directory path copied: 「%s」" (file-name-directory $fpath))
+           (file-name-directory $fpath))
+       (progn
+         (message "File path copied: 「%s」" $fpath)
+         $fpath )))))
