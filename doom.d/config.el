@@ -20,7 +20,7 @@
 (projectile-add-known-project (getenv "SOURCE"))
 
 (global-visual-line-mode t) ;; visual line wrap
-(setq scroll-margin 8)
+(setq scroll-margin 4)
 
 ;; when browsing wrapped lines scroll visually instead of jumping
 (define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
@@ -54,11 +54,6 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 ;; tags
 (setq tags-revert-without-query 1) ;; auto-reread tags when changed
 
-;; flycheck
-(setq flycheck-global-modes nil)
-;; (after! flycheck
-;;   (setq-default flycheck-checker 'python-pylint))
-
 ;; go mode settings
 (defun my-go-mode-hook ()
   ; Use goimports instead of go-fmt
@@ -72,16 +67,6 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 )
 (add-hook 'go-mode-hook 'my-go-mode-hook)
 
-;; python mode settings
-(defun my-python-mode-hook ()
-  (setq indent-tabs-mode nil tab-width 2)
-  ;; (idle-highlight-mode t)
-)
-(add-hook 'python-mode-hook 'my-python-mode-hook)
-
-;; (global-set-key (kbd "<backtab>") 'hs-toggle-hiding)
-;; (define-key python-mode-map (kbd "<backtab>") nil)
-
 (define-key evil-normal-state-map (kbd "C-c +") 'evil-numbers/inc-at-pt)
 (define-key evil-normal-state-map (kbd "C-c -") 'evil-numbers/dec-at-pt)
 
@@ -94,3 +79,18 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
    '(("\\`g s" . "\\`evilem--?motion-\\(.*\\)") . (nil . "◃\\1"))
    ))
 
+(after! python
+  (setq lsp-disabled-clients '(mspyls))
+  (setq lsp-diagnostic-package :none)
+  (setq lsp-pyls-plugins-pylint-enabled nil)
+  (setq lsp-pyls-plugins-autopep8-enabled nil)
+  (setq lsp-pyls-plugins-yapf-enabled nil)
+  (setq lsp-pyls-plugins-pyflakes-enabled nil)
+  (setq lsp-pyls-plugins-mccabe-enabled nil)
+  (setq lsp-pyls-plugins-flake8-enabled nil)
+  (setq lsp-pyls-plugins-pycodestyle-enabled nil)
+  (setq lsp-pyls-plugins-pycodestyle-ignore t)
+  (setq lsp-prefer-flymake nil)
+)
+
+(after! keychain-environment 'keychain-refresh-environment)

@@ -53,7 +53,6 @@
 ;; (package! elpy)
 (package! go-mode)
 (package! thrift)
-(package! blacken)
 (package! evil-numbers)
-(package! idle-highlight)
 (package! keychain-environment)
+(package! python-black)
