@@ -94,3 +94,9 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 )
 
 (after! keychain-environment 'keychain-refresh-environment)
+
+(after! neotree
+  (setq neo-window-width 40)
+  (setq doom-themes-neotree-file-icons nil)
+  (setq doom-themes-neotree-enable-folder-icons nil)
+)
