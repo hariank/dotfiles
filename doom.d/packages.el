@@ -56,3 +56,6 @@
 (package! evil-numbers)
 (package! keychain-environment)
 (package! python-black)
+(package! rust-mode)
+;; (package! cargo)
+;; (package! racer)

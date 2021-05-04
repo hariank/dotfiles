@@ -172,16 +172,3 @@ nnoremap <c-h> <c-w>h
 " folding
 set foldlevelstart=99  " start unfolded
 nnoremap <s-tab> zA
-
-" http://stackoverflow.com/questions/1551231/highlight-variable-under-cursor-in-vim-like-in-netbeans
-" :autocmd CursorMoved * exe printf('match IncSearch /\V\<%s\>/', escape(expand('<cword>'), '/\'))
-
-function! CopyPhabLink()
-  let lineNumber = line(".")
-  let filename = @%
-  let root = "https://abnormal.phacility.com/diffusion/1/browse/master/"
-  let @+ = root . filename . "$" . lineNumber
-  echo "Copied URL into clipboard"
-endfunction
-nnoremap <leader>y :call CopyPhabLink()<CR>
-nnoremap <leader>f :let @+=expand("%")<CR>

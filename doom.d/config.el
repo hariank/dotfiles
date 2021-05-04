@@ -100,3 +100,20 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
   (setq doom-themes-neotree-file-icons nil)
   (setq doom-themes-neotree-enable-folder-icons nil)
 )
+
+(map! "C-h" #'evil-window-left
+      "C-l" #'evil-window-right
+      "C-k" #'evil-window-up
+      "C-j" #'evil-window-down)
+
+(after! solidity
+  (define-key map "\C-j" nil))
+
+;; rust
+(after! rust-mode
+  (setq rust-format-show-buffer nil)
+  (setenv "PATH" (concat (getenv "PATH") "~/.cargo/bin"))
+  (setq exec-path (append exec-path '("~/.cargo/bin")))
+  (add-hook 'before-save-hook
+            (lambda () (when (eq major-mode 'rust-mode) (rust-format-buffer))))
+)

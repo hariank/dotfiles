@@ -1,0 +1,73 @@
+export ZSH=~/.oh-my-zsh
+ZSH_THEME="refined"
+plugins=(git tmux colorize sudo zsh-autosuggestions rsync)
+source $ZSH/oh-my-zsh.sh
+
+# User configuration
+
+export VIRTUAL_ENV_DISABLE_PROMPT=
+
+# Preferred editor for local and remote sessions
+export EDITOR='nvim'
+
+# ssh
+export SSH_KEY_PATH="~/.ssh/id_rsa"
+
+# x forwarding tmux
+echo $DISPLAY > ~/.display.txt
+alias up_disp='export DISPLAY=`cat ~/.display.txt`'
+
+# set colors
+export CLICOLOR=1
+
+# edit shell commands in vim
+autoload -U edit-command-line
+zle -N edit-command-line
+bindkey '^x^x' edit-command-line
+
+# export NVM_DIR="$HOME/.nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# Init jenv
+if which jenv > /dev/null; then eval "$(jenv init -)"; fi
+
+# added by Anaconda3 2019.10 installer
+# >>> conda init >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$(CONDA_REPORT_ERRORS=false '/Users/hmuthakana/opt/anaconda3/bin/conda' shell.bash hook 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    \eval "$__conda_setup"
+else
+    if [ -f "/Users/hmuthakana/opt/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/Users/hmuthakana/opt/anaconda3/etc/profile.d/conda.sh"
+        CONDA_CHANGEPS1=false conda activate base
+    else
+        \export PATH="/Users/hmuthakana/opt/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda init <<<
+
+# tabtab source for packages
+# uninstall by removing these lines
+# [[ -f ~/.config/tabtab/zsh/__tabtab.zsh ]] && . ~/.config/tabtab/zsh/__tabtab.zsh || true
+
+eval `keychain --quiet --eval --agents ssh id_rsa` 2>/dev/null
+
+export JAVA_HOME="$(readlink "$(jenv prefix)")"
+export GOPATH="/Users/hmuthakana/go"
+export WORKON_HOME="/Users/hmuthakana/opt/anaconda3/envs"
+export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/library"
+
+export PATH="$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH"
+export PATH="$HOME/go/bin:$PATH"
+export PATH="$HOME/.local/share/solana/install/active_release/bin:$PATH"
+
+export PATH="$HOME/arcanist/bin:$PATH"
+export PATH="$HOME/opt/anaconda3/bin:$PATH"
+export SPARK_HOME="$HOME/installs/spark-2.3.0-bin-hadoop2.7"
+export PATH="$SPARK_HOME/bin:$PATH"
+
+export PATH="$HOME/.emacs.d/bin:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH"
