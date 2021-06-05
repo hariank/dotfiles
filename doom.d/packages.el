@@ -57,3 +57,4 @@
 (package! python-black)
 (package! rust-mode)
 (package! magit-section)
+(package! prettier-js)

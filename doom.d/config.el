@@ -15,10 +15,6 @@
 (setq doom-theme 'doom-vibrant)
 (setq display-line-numbers-type t)
 
-;; default project directories
-(projectile-add-known-project "~/dotfiles")
-(projectile-add-known-project (getenv "SOURCE"))
-
 (global-visual-line-mode t) ;; visual line wrap
 (setq scroll-margin 4)
 
@@ -54,7 +50,6 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 ;; tags
 (setq tags-revert-without-query 1) ;; auto-reread tags when changed
 
-;; go mode settings
 (defun my-go-mode-hook ()
   ; Use goimports instead of go-fmt
   (setq gofmt-command "goimports")
@@ -62,6 +57,10 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
   (add-hook 'before-save-hook 'gofmt-before-save)
 )
 (add-hook 'go-mode-hook 'my-go-mode-hook)
+
+(add-hook 'rjsx-mode-hook  'prettier-js-mode)
+(add-hook 'js2-mode-hook  'prettier-js-mode)
+(add-hook 'typescript-mode-hook  'prettier-js-mode)
 
 (define-key evil-normal-state-map (kbd "C-c +") 'evil-numbers/inc-at-pt)
 (define-key evil-normal-state-map (kbd "C-c -") 'evil-numbers/dec-at-pt)
