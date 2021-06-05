@@ -50,12 +50,10 @@
 ;(unpin! t)
 
 
-;; (package! elpy)
 (package! go-mode)
 (package! thrift)
 (package! evil-numbers)
 (package! keychain-environment)
 (package! python-black)
 (package! rust-mode)
-;; (package! cargo)
-;; (package! racer)
+(package! magit-section)

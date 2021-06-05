@@ -60,10 +60,6 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
   (setq gofmt-command "goimports")
   ; Call Gofmt before saving
   (add-hook 'before-save-hook 'gofmt-before-save)
-  ; Customize compile command to run go build
-  (if (not (string-match "go" compile-command))
-      (set (make-local-variable 'compile-command)
-           "go build -v && go test -v && go vet"))
 )
 (add-hook 'go-mode-hook 'my-go-mode-hook)
 
@@ -112,8 +108,8 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 ;; rust
 (after! rust-mode
   (setq rust-format-show-buffer nil)
-  (setenv "PATH" (concat (getenv "PATH") "~/.cargo/bin"))
-  (setq exec-path (append exec-path '("~/.cargo/bin")))
+  (setenv "PATH" (concat (getenv "PATH") (expand-file-name "~/.cargo/bin")))
+  (setq exec-path (append exec-path `((expand-file-name "~/.cargo/bin"))))
   (add-hook 'before-save-hook
             (lambda () (when (eq major-mode 'rust-mode) (rust-format-buffer))))
 )
